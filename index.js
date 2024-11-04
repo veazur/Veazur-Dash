@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 app.post('/signup-confirm', (req, res) => {
     const apiKey = process.env.PTERO;
-    const apiUrl = 'https://panel_link/api/application/users';
+    const apiUrl = 'https://panel-link.com/api/application/users';
 
     axios({
         method: 'post',
@@ -27,7 +27,8 @@ app.post('/signup-confirm', (req, res) => {
             email: req.body.email,
             username: req.body.username,
             first_name: req.body.first_name,
-            last_name: req.body.last_name
+            last_name: req.body.last_name,
+            password: req.body.password
         }
     })
     .then(response => {
