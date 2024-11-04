@@ -1,0 +1,24 @@
+{
+  "name": "veazur-client",
+  "version": "0.0.1",
+  "description": "Another client for pterodactyl (and maybe skyport)",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/veazur/Veazur-Client.git"
+  },
+  "keywords": [
+    "pterodactyl-client",
+    "pterodactyl-dash",
+    "pterodactyl-dashboard"
+  ],
+  "author": "playstation451",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/veazur/Veazur-Client/issues"
+  },
+  "homepage": "https://github.com/veazur/Veazur-Client#readme"
+}
