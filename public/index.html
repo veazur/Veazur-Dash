@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Signup Page</title>
+    <title>Signup</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,11 +41,36 @@
             background-color: #45a049;
         }
     </style>
+    <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const uppercasePattern = /[A-Z]/; // Pattern to check for at least one uppercase letter
+
+            if (!emailPattern.test(email)) {
+                alert('Please enter a valid email address.');
+                return false;
+            }
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters long.');
+                return false;
+            }
+
+            if (!uppercasePattern.test(password)) {
+                alert('Password must contain at least one uppercase letter.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </head>
 <body>
     <div class="signup-container">
         <h2>Signup</h2>
-        <form action="/signup" method="post">
+        <form action="/signup" method="post" onsubmit="return validateForm()">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="email">Email:</label>

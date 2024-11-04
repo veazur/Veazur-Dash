@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.post('/signup', (req, res) => {
+app.post('/', (req, res) => {
     const { username, email, password } = req.body;
     res.send('Signup successful!');
 });
