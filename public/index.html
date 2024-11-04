@@ -22,7 +22,9 @@
         }
         .signup-container input[type="text"],
         .signup-container input[type="email"],
-        .signup-container input[type="password"] {
+        .signup-container input[type="password"],
+        .signup-container input[type="text"][name="first_name"],
+        .signup-container input[type="text"][name="last_name"] {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -45,6 +47,8 @@
         function validateForm() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const firstName = document.getElementById('first_name').value;
+            const lastName = document.getElementById('last_name').value;
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const uppercasePattern = /[A-Z]/;
 
@@ -63,6 +67,11 @@
                 return false;
             }
 
+            if (firstName.length === 0 || lastName.length === 0) {
+                alert('Please enter first and last name.');
+                return false;
+            }
+
             return true;
         }
     </script>
@@ -70,7 +79,11 @@
 <body>
     <div class="signup-container">
         <h2>Signup</h2>
-        <form action="/signup" method="post" onsubmit="return validateForm()">
+        <form action="/signup-confirm" method="post" onsubmit="return validateForm()">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name" required>
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name" required>
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             <label for="email">Email:</label>
