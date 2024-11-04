@@ -46,7 +46,7 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const uppercasePattern = /[A-Z]/; // Pattern to check for at least one uppercase letter
+            const uppercasePattern = /[A-Z]/;
 
             if (!emailPattern.test(email)) {
                 alert('Please enter a valid email address.');
