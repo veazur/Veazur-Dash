@@ -82,6 +82,14 @@ app.post('/signup-confirm', (req, res) => {
     }
 });
 
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/public/register.html');
+});
+
+app.get('/login', (req, res) => {
+  res.sendFile(__dirname + '/public/login.html');
+});
+
 app.listen(port, () => {
   console.log(`Veazur Client is running on http://localhost:${port}`);
 });
