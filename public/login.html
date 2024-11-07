@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="assets/css/login.css" />
+    <script src="assets/js/login.js"></script>
+    <title>Veazur Login</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login-confirm" method="post" onsubmit="return validateForm()">
+            <label for="email">Email:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <input type="submit" value="Log in">
+        </form>
+    </div>
+</body>
+</html>
