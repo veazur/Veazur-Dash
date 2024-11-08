@@ -4,7 +4,8 @@
   "description": "Another client for pterodactyl (and maybe skyport)",
   "main": "index.js",
   "scripts": {
-    "start": "node ."
+    "start": "node .",
+    "createuser": "node CreateUser.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "inquirer": "^12.0.1"
   }
 }
