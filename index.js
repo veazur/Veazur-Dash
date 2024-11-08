@@ -1,7 +1,6 @@
 const express = require('express');
-const bcrypt = require('bcrypt');
 const axios = require('axios');
-const dotenv = require('dotenv');
+require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
@@ -17,7 +16,7 @@ const accounts = require('./accounts.json');
 
 app.post('/signup-confirm', (req, res) => {
     const apiKey = process.env.PTERO;
-    const apiUrl = 'https://panel-link/api/application/users';
+    const apiUrl = `${process.env.PANEL_LINK}/api/application/users`;
   
     const userData = {
       email: req.body.email,

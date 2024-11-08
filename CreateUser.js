@@ -1,5 +1,6 @@
 const axios = require('axios');
 const inquirer = require('inquirer');
+require('dotenv').config({ path: './.env' });
 
 async function signUp() {
     const prompt = inquirer.createPromptModule();
@@ -42,11 +43,11 @@ async function signUp() {
         };
 
         const apiKey = process.env.PTERO;
-        const apiUrl = 'https://panel-link/api/application/users';
+        const url = `https://${process.env.PANEL_LINK}/api/application/users`;
 
         axios({
           method: 'post',
-          url: apiUrl,
+          url: url,
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
