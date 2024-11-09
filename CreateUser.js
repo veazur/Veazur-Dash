@@ -1,77 +1,71 @@
 const axios = require('axios');
-const inquirer = require('inquirer');
+const fs = require('fs');
 require('dotenv').config({ path: './.env' });
 
-async function signUp() {
-    const prompt = inquirer.createPromptModule();
+const accounts = require('./accounts.json');
 
-    try {
-        const answers = await prompt([
-            {
-              type: 'input',
-              name: 'first_name',
-              message: 'First Name:'
-            },
-            {
-              type: 'input',
-              name: 'last_name',
-              message: 'Last Name:'
-            },
-            {
-              type: 'input',
-              name: 'email',
-              message: 'Email:'
-            },
-            {
-              type: 'password',
-              name: 'password',
-              message: 'Password:'
-            },
-            {
-              type: 'input',
-              name: 'username',
-              message: 'Username:'
-            }
-        ]);
+async function register() {
+  const email = await askForInput('Enter your email address:');
+  const username = await askForInput('Enter your username:');
+  const firstName = await askForInput('Enter your first name:');
+  const lastName = await askForInput('Enter your last name:');
+  const password = await askForPassword('Enter your password:');
 
-        const userData = {
-          email: answers.email,
-          username: answers.username,
-          first_name: answers.first_name,
-          last_name: answers.last_name,
-          password: answers.password
-        };
+  const apiKey = process.env.PTERO;
+  const apiUrl = `${process.env.PANEL_LINK}/api/application/users`;
 
-        const apiKey = process.env.PTERO;
-        const url = `https://${process.env.PANEL_LINK}/api/application/users`;
+  const userData = {
+    email,
+    username,
+    first_name: firstName,
+    last_name: lastName,
+    password
+  };
 
-        axios({
-          method: 'post',
-          url: url,
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + apiKey
-          },
-          data: userData
-        })
-        .then(response => {
-          const userId = response.data.id; 
-          console.log(`User created with ID: ${userId}`);
+  axios({
+    method: 'post',
+    url: apiUrl,
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + apiKey
+    },
+    data: userData
+  })
+  .then(response => {
+    console.log('User created successfully!');
 
-          const fs = require('fs');
-          const accountsJson = JSON.stringify(userData, null, 2);
-          fs.writeFileSync('./accounts.json', accountsJson);
-
-          console.log(`User created successfully with ID: ${userId}`);
-        })
-        .catch(error => {
-          console.error(error);
-          console.log('Error creating user');
-        });
-    } catch (err) {
-        console.error(err);
-    }
+    accounts.push({
+      ... userData
+    });
+    const accountsJson = JSON.stringify(accounts, null, 2);
+    fs.writeFileSync('./accounts.json', accountsJson);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 }
 
-signUp();
+async function askForInput(message) {
+  return new Promise(resolve => {
+    process.stdout.write(`${message} `);
+    process.stdin.resume();
+    process.stdin.on('data', data => {
+      process.stdin.pause();
+      resolve(data.toString().trim());
+    });
+  });
+}
+
+async function askForPassword(message) {
+  return new Promise(resolve => {
+    process.stdout.write(`${message} `);
+    process.stdin.resume();
+    process.stdin.on('data', data => {
+      process.stdin.pause();
+      resolve(data.toString().trim());
+    });
+  });
+}
+
+register();
