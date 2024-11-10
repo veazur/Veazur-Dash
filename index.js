@@ -4,8 +4,6 @@ require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-dotenv.config();
-
 const app = express();
 const port = 3000;
 
