@@ -23,4 +23,8 @@ npm run createuser
 
 ## Configuring
 
-In the .env file replace both the api token and panel link to your pterodactyl api token that have all access and your pterodactyl panel link. Currently you cant add eggs or nests because I havent even made the main dashboard for it but there will be a way of adding it later on the line.
+In the .env file replace both the API token and panel link to your pterodactyl api token that have all access and your pterodactyl panel link. Currently you cant add eggs or nests because I havent even made the main dashboard for it but there will be a way of adding it later on the line.
+
+`PANEL_LINK` This is your pterodactyl panel link please include https:// but no / at he end.
+`PTERO` This is your pterodactyl panel API key/token it should always start with ptla.
+`SESSION_SECRET` You can leave it as it is or you can configure it for a more secure secret key.
