@@ -17,7 +17,7 @@ npm i
 npm start
 ```
 
-If you want to create a user without registering on the site you canuse the built in register command
+If you want to create a user without registering on the site you can use the built in register command
 
 ```
 npm run createuser
