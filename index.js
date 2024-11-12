@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
+const session = require('express-session');
 const fs = require('fs');
 
 const app = express();
@@ -9,6 +10,15 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false
+  }
+}));
 
 const accounts = require('./accounts.json');
 
@@ -56,28 +66,37 @@ app.post('/signup-confirm', (req, res) => {
   app.post('/login-confirm', (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-
+  
     if (accounts.length === 0) {
-        console.log('No accounts found');
-        res.status(404).send('No accounts found');
+      console.log('No accounts found');
+      res.status(404).send('No accounts found');
     } else {
-        const account = accounts.find(account => account.email.trim().toLowerCase() === username.trim().toLowerCase());
-
-        if (!account) {
-            console.log('No matching account found for email:', username);
-            res.status(401).send('Invalid email');
+      const account = accounts.find(account => account.email.trim().toLowerCase() === username.trim().toLowerCase());
+  
+      if (!account) {
+        console.log('No matching account found for email:', username);
+        res.status(401).send('Invalid email');
+      } else {
+        console.log('Matching account found:', account.email);
+        if(password === account.password){
+          console.log('User authenticated successfully');
+          req.session.username = username;
+          res.redirect('/dash');
         } else {
-            console.log('Matching account found:', account.email);
-            if(password === account.password){
-                console.log('User authenticated successfully');
-                res.send('User logged in successfully');
-            } else {
-                console.log('Invalid email or password');
-                res.status(401).send('Invalid email or password');
-            }
+          console.log('Invalid email or password');
+          res.status(401).send('Invalid email or password');
         }
+      }
     }
-});
+  });
+  
+  app.get('/dash', (req, res) => {
+    if(req.session.username) {
+      res.send(`Welcome, ${req.session.username}! You are now logged in.`);
+    } else {
+      res.send('Please log in first.');
+    }
+  });
 
 app.get('/register', (req, res) => {
   res.sendFile(__dirname + '/public/register.html');
@@ -85,6 +104,10 @@ app.get('/register', (req, res) => {
 
 app.get('/login', (req, res) => {
   res.sendFile(__dirname + '/public/login.html');
+});
+
+app.get('/dash', (req, res) => {
+  res.sendFile(__dirname + '/public/dashboard.html');
 });
 
 app.listen(port, () => {
