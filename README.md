@@ -1,5 +1,7 @@
 # Veazur-Client
 [![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fveazur%2FVeazur-Dash&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=veiws&edge_flat=false)](https://hits.seeyoufarm.com)
+<a  href="https://github.com/veazur/Veazur-Dash/stargazers"><img src="https://img.shields.io/github/stars/veazur/Veazur-Dash?label=%E2%AD%90" height="20"/></a>
+
 
 Another client for pterodactyl (and maybe skyport/airlink)
 
