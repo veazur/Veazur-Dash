@@ -5,5 +5,12 @@
     "first_name": "test",
     "last_name": "test",
     "password": "TestTest"
+  },
+  {
+    "email": "test2@test.test",
+    "username": "test2",
+    "first_name": "test2",
+    "last_name": "test2",
+    "password": "sdfgsdfgsdgA"
   }
 ]

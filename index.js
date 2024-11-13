@@ -47,15 +47,15 @@ app.post('/signup-confirm', (req, res) => {
     .then(response => {
       const userId = response.data.id; 
       console.log(`User created with ID: ${userId}`);
-  
+    
       accounts.push({
         ...userData,
         id: userId
       });
       const accountsJson = JSON.stringify(accounts, null, 2);
       fs.writeFileSync('./accounts.json', accountsJson);
-  
-      res.send(`User created successfully with ID: ${userId}`);
+    
+      res.redirect('/login');
     })
     .catch(error => {
       console.error(error);
