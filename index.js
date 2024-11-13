@@ -91,11 +91,7 @@ app.post('/signup-confirm', (req, res) => {
   });
   
   app.get('/dash', (req, res) => {
-    if(req.session.username) {
-      res.send(`Welcome, ${req.session.username}! You are now logged in.`);
-    } else {
-      res.send('Please log in first.');
-    }
+    res.sendFile(__dirname + '/public/dashboard.html');
   });
 
 app.get('/register', (req, res) => {
