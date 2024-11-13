@@ -20,6 +20,8 @@ app.use(session({
   }
 }));
 
+app.set('view engine', 'ejs');
+
 const accounts = require('./accounts.json');
 
 app.post('/signup-confirm', (req, res) => {
@@ -104,6 +106,10 @@ app.get('/login', (req, res) => {
 
 app.get('/dash', (req, res) => {
   res.sendFile(__dirname + '/public/dashboard.html');
+});
+
+app.get('/footer', (req, res) => {
+  res.render('/public/assets/parts/footer');
 });
 
 app.listen(port, () => {
