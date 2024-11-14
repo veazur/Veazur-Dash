@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard</title>
-  <script type="text/javascript" src="./assets/packages/ejs.min.js"></script>
+  <script type="text/javascript" src="assets/packages/ejs.min.js"></script>
 </head>
 <body>
-  <footer id="footer-root"></footer>
   <script>
-    const footerTemplate = document.querySelector('#footer-root');
-    const footerHtml = ejs.render(footerTemplate.outerHTML, { });
-    footerTemplate.outerHTML = footerHtml;
+    function renderFooter(template) {
+      const footerHtml = ejs.render(template, {});
+      return footerHtml;
+    }
+
+    const footerHtml = renderFooter('<footer><%= include("/assets/parts/footer.ejs"); %></footer>');
+    document.getElementById('footer').innerHTML = footerHtml;
   </script>
+  <footer id="footer"></footer>
 </body>
 </html>
