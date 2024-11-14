@@ -6,8 +6,11 @@
   <script type="text/javascript" src="./assets/packages/ejs.min.js"></script>
 </head>
 <body>
-  <footer>
-    <% include('./parts/footer.ejs'); %>
-  </footer>
+  <footer id="footer-root"></footer>
+  <script>
+    const footerTemplate = document.querySelector('#footer-root');
+    const footerHtml = ejs.render(footerTemplate.outerHTML, { });
+    footerTemplate.outerHTML = footerHtml;
+  </script>
 </body>
 </html>
