@@ -20,8 +20,6 @@ app.use(session({
   }
 }));
 
-app.set('view engine', 'ejs');
-
 const accounts = require('./accounts.json');
 
 app.post('/signup-confirm', (req, res) => {

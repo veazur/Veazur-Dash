@@ -2,17 +2,16 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
-  <script type="text/javascript" src="assets/packages/ejs.min.js"></script>
+  <title><%= title %></title>
 </head>
 <body>
-  <script>
+  <script type="text/javascript">
     function renderFooter(template) {
       const footerHtml = ejs.render(template, {});
       return footerHtml;
     }
 
-    const footerHtml = renderFooter('<footer><%= include("/assets/parts/footer.ejs"); %></footer>');
+    const footerHtml = renderFooter('<footer style="background-color: #161820" class="footer"> <%= include("/footer.ejs"); %></footer>');
     document.getElementById('footer').innerHTML = footerHtml;
   </script>
   <footer id="footer"></footer>
