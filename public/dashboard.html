@@ -1,19 +1,8 @@
-<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title><%= title %></title>
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+	<title>Home</title>
 </head>
 <body>
-  <script type="text/javascript">
-    function renderFooter(template) {
-      const footerHtml = ejs.render(template, {});
-      return footerHtml;
-    }
-
-    const footerHtml = renderFooter('<footer style="background-color: #161820" class="footer"> <%= include("/footer.ejs"); %></footer>');
-    document.getElementById('footer').innerHTML = footerHtml;
-  </script>
-  <footer id="footer"></footer>
 </body>
 </html>
