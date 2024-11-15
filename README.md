@@ -32,3 +32,5 @@ In the .env file replace both the API token and panel link to your pterodactyl a
 `PTERO` This is your pterodactyl panel API key/token it should always start with ptla.
 
 `SESSION_SECRET` You can leave it as it is or you can configure it for a more secure secret key.
+
+`PORT` Change the port to your choosing the default port is 3000
