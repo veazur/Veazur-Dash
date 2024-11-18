@@ -2,23 +2,30 @@ const express = require('express');
 const axios = require('axios');
 require('dotenv').config({ path: './.env' });
 const bodyParser = require('body-parser');
-const session = require('express-session');
 const fs = require('fs');
+const Sequelize = require('sequelize');
 
 const app = express();
 const port = process.env.PORT;
 
+const db = new Sequelize('database_name', 'root', {
+  host: 'localhost',
+  dialect: 'mysql'
+});
+
+const loggedUsers = db.define('logged_users', {
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  username: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: {
-    secure: false
-  }
-}));
 
 const accounts = require('./accounts.json');
 
@@ -80,8 +87,16 @@ app.post('/signup-confirm', (req, res) => {
         console.log('Matching account found:', account.email);
         if(password === account.password){
           console.log('User authenticated successfully');
-          req.session.username = username;
-          res.redirect('/dash');
+          db.model('logged_users').create({
+            email: account.email,
+            username: username
+          }).then(() => {
+            req.session.username = username;
+            res.redirect('/dash');
+          }).catch(error => {
+            console.error(error);
+            res.status(500).send('Error storing login information');
+          });
         } else {
           console.log('Invalid email or password');
           res.status(401).send('Invalid email or password');
@@ -89,10 +104,15 @@ app.post('/signup-confirm', (req, res) => {
       }
     }
   });
+
+  app.get('/dash', (req, res) => {
+    if (req.session.loggedinUser) {
+      res.send(`Welcome, ${req.session.loggedinUser.username} | Email: ${req.session.loggedinUser.email}`);
+    } else {
+      res.status(401).send('You are not logged in');
+    }
+  });
   
-app.get('/dash', (req, res) => {
-  res.sendFile(__dirname + '/public/dashboard.html');
-});
 
 app.get('/register', (req, res) => {
   res.sendFile(__dirname + '/public/register.html');
