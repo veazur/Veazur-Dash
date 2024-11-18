@@ -90,9 +90,9 @@ app.post('/signup-confirm', (req, res) => {
     }
   });
   
-  app.get('/dash', (req, res) => {
-    res.sendFile(__dirname + '/public/dashboard.html');
-  });
+app.get('/dash', (req, res) => {
+  res.sendFile(__dirname + '/public/dashboard.html');
+});
 
 app.get('/register', (req, res) => {
   res.sendFile(__dirname + '/public/register.html');
@@ -104,6 +104,14 @@ app.get('/login', (req, res) => {
 
 app.get('/dash', (req, res) => {
   res.sendFile(__dirname + '/public/dashboard.html');
+});
+
+app.get('/404', (req, res) => {
+  res.sendFile(__dirname + '/public/404.html');
+});
+
+app.get("/*", (req, res) => {
+  res.redirect("/404");
 });
 
 app.listen(port, () => {

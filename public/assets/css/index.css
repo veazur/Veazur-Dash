@@ -5,7 +5,7 @@ body {
     padding: 20px;
   }
   .button {
-    background-color: #0047ab;
+    background-color: #013b0a;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -13,5 +13,5 @@ body {
     cursor: pointer;
   }
   .button:hover {
-    background-color: #0065bd;
+    background-color: #013b0a;
   }
